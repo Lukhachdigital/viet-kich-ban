@@ -1,0 +1,5 @@
+{
+  "name": "AI Video Script & Prompt Generator",
+  "description": "An AI-powered tool to generate detailed video scripts and JSON prompts based on a user's idea. The AI acts as a playwright, historian, and traveler to create hypothetical scenarios for video creation.",
+  "requestFramePermissions": []
+}
