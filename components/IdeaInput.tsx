@@ -7,13 +7,11 @@ interface IdeaInputProps {
   setDuration: (duration: number) => void;
   style: string;
   setStyle: (style: string) => void;
-  apiKey: string;
-  setApiKey: (apiKey: string) => void;
   onGenerate: () => void;
   isLoading: boolean;
 }
 
-const styles = ['Điện ảnh', 'Tài liệu', 'Khoa học viễn tưởng', 'Cổ điển', 'Hoạt hình Anime', 'Siêu thực'];
+const styles = ['Điện ảnh', 'Tài liệu', 'Khoa học viễn tưởng', 'Cổ điển', 'Hoạt hình Anime', 'Tiền sử'];
 
 export const IdeaInput: React.FC<IdeaInputProps> = ({
   idea,
@@ -22,53 +20,11 @@ export const IdeaInput: React.FC<IdeaInputProps> = ({
   setDuration,
   style,
   setStyle,
-  apiKey,
-  setApiKey,
   onGenerate,
   isLoading,
 }) => {
   return (
     <div className="bg-gray-800 p-6 rounded-xl shadow-lg space-y-6 border border-gray-700">
-       <div>
-        {apiKey ? (
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">OpenAI API Key</label>
-            <div className="flex items-center justify-between bg-gray-900/50 border border-green-700 rounded-lg p-3">
-              <div className="flex items-center space-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-green-400">API Key is set.</span>
-              </div>
-              <button onClick={() => setApiKey('')} className="text-indigo-400 hover:underline text-sm font-semibold">
-                Change Key
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <label htmlFor="api-key" className="block text-sm font-medium text-gray-300 mb-2">
-              OpenAI API Key
-            </label>
-            <input
-              type="password"
-              id="api-key"
-              className="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              placeholder="Nhập API Key OpenAI của bạn tại đây"
-              autoComplete="off"
-            />
-            <p className="mt-2 text-xs text-gray-500">
-              Bạn có thể lấy API Key tại{' '}
-              <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">
-                OpenAI Platform
-              </a>.
-            </p>
-          </div>
-        )}
-      </div>
-
       <div>
         <label htmlFor="idea" className="block text-sm font-medium text-gray-300 mb-2">
           Ý tưởng chính
@@ -120,7 +76,7 @@ export const IdeaInput: React.FC<IdeaInputProps> = ({
 
       <button
         onClick={onGenerate}
-        disabled={isLoading || !idea || !apiKey}
+        disabled={isLoading || !idea}
         className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-lg"
       >
         {isLoading ? (

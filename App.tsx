@@ -13,20 +13,14 @@ const App: React.FC = () => {
   const [scriptData, setScriptData] = useState<ScriptData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [apiKey, setApiKey] = useState<string>('');
 
   const handleGenerate = useCallback(async () => {
-    if (!apiKey) {
-      setError('Vui lòng nhập OpenAI API Key của bạn.');
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
     setScriptData(null);
 
     try {
-      const result = await generateScriptAndPrompts(idea, duration, style, apiKey);
+      const result = await generateScriptAndPrompts(idea, duration, style);
       setScriptData(result);
     } catch (e: any) {
       console.error(e);
@@ -34,7 +28,7 @@ const App: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [idea, duration, style, apiKey]);
+  }, [idea, duration, style]);
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 font-sans">
@@ -49,8 +43,6 @@ const App: React.FC = () => {
               setDuration={setDuration}
               style={style}
               setStyle={setStyle}
-              apiKey={apiKey}
-              setApiKey={setApiKey}
               onGenerate={handleGenerate}
               isLoading={isLoading}
             />

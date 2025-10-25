@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 
 interface CopyButtonProps {
@@ -9,11 +8,12 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = useCallback(() => {
+    if (isCopied) return;
     navigator.clipboard.writeText(textToCopy).then(() => {
       setIsCopied(true);
-      // setTimeout(() => setIsCopied(false), 2000); // Removed this line
+      setTimeout(() => setIsCopied(false), 2000);
     });
-  }, [textToCopy]);
+  }, [textToCopy, isCopied]);
 
   return (
     <button
